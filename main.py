@@ -18,6 +18,7 @@ def main():
     play = True
     clock = pygame.time.Clock()
     board = Board()
+    drag = -1
 
     # main loop
     while play:
@@ -27,10 +28,25 @@ def main():
                 play = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                drag = event.button
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
-                # print(row, col)
-                board.add_comp(col, row)
+                if event.button == 1:
+                    board.add_comp(col, row)
+                elif event.button == 3:
+                    board.remove_comp(col, row)
+            
+            if event.type == pygame.MOUSEBUTTONUP:
+                drag = -1
+
+            if event.type == pygame.MOUSEMOTION:
+                mouse_y, mouse_x = get_row_col_from_mouse(event.pos)
+                # print(mouse_x, mouse_y)
+                if drag == 1:
+                    board.add_comp(mouse_x, mouse_y)
+                elif drag == 3:
+                    board.remove_comp(mouse_x, mouse_y)
+
 
             # redraw function
             board.draw_grid(window)

@@ -1,5 +1,6 @@
 from ctypes.wintypes import SIZE
 from tkinter.tix import ROW
+from tracemalloc import start
 import pygame
 from .constants import *
 
@@ -30,4 +31,11 @@ class Board:
         if self.start == (-1, -1):
             self.start = (row, col)
         else:
-            self.goals.append((row, col))
+            if self.start != (row, col):
+                self.goals.append((row, col))
+
+    def remove_comp(self, row, col):
+        if (row, col) == self.start:
+            self.start = (-1, -1)
+        elif (row, col) in self.goals:
+            self.goals.remove((row, col))
