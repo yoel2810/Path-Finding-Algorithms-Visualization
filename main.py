@@ -1,4 +1,5 @@
 import pygame
+from visualizer.bfs import BFS
 from visualizer.constants import SIZE, SQUARE_SIZE, GAP
 from visualizer.board import Board
 
@@ -32,10 +33,10 @@ def main():
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
                 if event.button == 1:
-                    board.add_comp(col, row)
+                    board.add_remove_comp(col, row)
                 elif event.button == 3:
-                    board.remove_comp(col, row)
-            
+                    board.add_remove_block(col, row)
+
             if event.type == pygame.MOUSEBUTTONUP:
                 drag = -1
 
@@ -43,10 +44,14 @@ def main():
                 mouse_y, mouse_x = get_row_col_from_mouse(event.pos)
                 # print(mouse_x, mouse_y)
                 if drag == 1:
-                    board.add_comp(mouse_x, mouse_y)
+                    board.add_remove_comp(mouse_x, mouse_y)
                 elif drag == 3:
-                    board.remove_comp(mouse_x, mouse_y)
+                    board.add_remove_block(mouse_x, mouse_y)
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    bfs = BFS(board)
+                    bfs.run()
 
             # redraw function
             board.draw_grid(window)
