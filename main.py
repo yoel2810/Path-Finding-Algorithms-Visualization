@@ -1,5 +1,5 @@
 import pygame
-from visualizer.bfs import BFS
+from visualizer.algorithm import Algorithm
 from visualizer.constants import SIZE, SQUARE_SIZE, GAP
 from visualizer.board import Board
 
@@ -50,8 +50,8 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    bfs = BFS(board, window)
-                    bfs.run()
+                    algo = Algorithm(board, window)
+                    algo.dfs()
 
             # redraw function
             board.draw_grid(window)

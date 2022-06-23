@@ -17,13 +17,13 @@ class Node:
 
     def move_down(self, grid):
         i, j = self.current
-        if i >= SIZE - 1 or (i + 1, j) in grid.blocks:
+        if i >= ROWS - 1 or (i + 1, j) in grid.blocks:
             return None
         return Node(self.path, i + 1, j)
 
     def move_right(self, grid):
         i, j = self.current
-        if j >= SIZE - 1 or (i, j + 1) in grid.blocks:
+        if j >= ROWS - 1 or (i, j + 1) in grid.blocks:
             return None
         return Node(self.path, i, j + 1)
 
