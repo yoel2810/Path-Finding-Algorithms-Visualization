@@ -24,7 +24,7 @@ class BFS:
         nodeNumber += 1
         closedList = {}
 
-        while L:
+        while L.qsize() > 0:
             n = L.get()
             self.board.draw_grid(self.win, openList, closedList)
             pygame.display.update()
@@ -43,4 +43,5 @@ class BFS:
                         return
                     L.put(op)
                     openList[operatorKey] = op
+        print("no path\n")
         return "no path\n"
