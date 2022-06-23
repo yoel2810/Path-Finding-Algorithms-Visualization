@@ -53,9 +53,9 @@ def main():
                     bfs = BFS(board, window)
                     bfs.run()
 
-        # redraw function
-        board.draw_grid(window)
-        pygame.display.update()
+            # redraw function
+            board.draw_grid(window)
+            pygame.display.update()
 
     pygame.quit()
 
