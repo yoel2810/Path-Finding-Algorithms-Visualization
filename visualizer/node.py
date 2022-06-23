@@ -4,7 +4,8 @@ from .constants import *
 class Node:
     def __init__(self, path, row, col) -> None:
         self.current = (row, col)
-        self.path = path
+        self.path = path.copy()
+        self.path.append((row, col))
         self.row = row
         self.col = col
 
@@ -12,25 +13,25 @@ class Node:
         i, j = self.current
         if i <= 0 or (i - 1, j) in grid.blocks:
             return None
-        return Node(self.path.append((i, j)), i - 1, j)
+        return Node(self.path, i - 1, j)
 
     def move_down(self, grid):
         i, j = self.current
         if i >= SIZE - 1 or (i + 1, j) in grid.blocks:
             return None
-        return Node(self.path.append((i, j)), i + 1, j)
+        return Node(self.path, i + 1, j)
 
     def move_right(self, grid):
         i, j = self.current
         if j >= SIZE - 1 or (i, j + 1) in grid.blocks:
             return None
-        return Node(self.path.append((i, j)), i, j + 1)
+        return Node(self.path, i, j + 1)
 
     def move_left(self, grid):
         i, j = self.current
         if j <= 0 or (i, j - 1) in grid.blocks:
             return None
-        return Node(self.path.append((i, j)), i, j - 1)
+        return Node(self.path, i, j - 1)
 
     def get_operators(self, grid):
         operationList = {}
